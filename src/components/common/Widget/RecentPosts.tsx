@@ -1,16 +1,19 @@
-import React from 'react'
+import { BlogInterface } from '../../../utils/interfaces';
 import HorizontalCard from '../Card/HorizontalCard'
 import Container from './Container'
 
-export default function RecentPosts() {
+interface Props {
+  latestsBlogs: BlogInterface[];
+}
+
+export default function RecentPosts({latestsBlogs}:Props) {
   return (
     <div className='mt-4'>
         <Container title="Recent Posts">
             <div>
-                <HorizontalCard title="Major Crypto Exchanges Face Action Over" time="8 hours ago" image="/images/alert.png" />
-                <HorizontalCard title="Major Crypto Exchanges Face Action Over" time="8 hours ago" image="/images/alert.png" />
-                <HorizontalCard title="Major Crypto Exchanges Face Action Over" time="8 hours ago" image="/images/alert.png" />
-                <HorizontalCard title="Major Crypto Exchanges Face Action Over" time="8 hours ago" image="/images/alert.png" />
+              {latestsBlogs.map(blog => {
+                return(<HorizontalCard key={blog._id} blog={blog} />)
+              })}
             </div>
         </Container>
     </div>

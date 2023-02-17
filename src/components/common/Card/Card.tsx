@@ -1,21 +1,29 @@
-import React from 'react'
+import { useNavigate } from "react-router-dom";
 
 import { MdOutlineTrendingFlat, MdOutlineAccessTimeFilled } from "react-icons/md";
+import { BlogInterface } from '../../../utils/interfaces';
 
-export default function Card() {
+interface Props {
+    blog: BlogInterface;
+}
+
+export default function Card({blog}:Props) {
+
+  const navigate = useNavigate();
+
   return (
     <div className='w-full px-3'>
         <div className='shadow-lg rounded-b-lg'>
             <div className='w-full h-[200px] rounded-t-lg'>
-                <img alt="Alert" src='/images/alert.png' className='w-full h-full rounded-t-lg object-cover aspect-square' />
+                <img alt="Alert" src={blog.photo} className='w-full h-full rounded-t-lg object-cover aspect-square' />
             </div>
 
             <div className='p-4'>
-                <div className='text-title text-xl'>Major Crypto Exchanges Face Action Over</div>
+                <div className='text-title text-xl'>{blog.title.length > 40 ? blog.title.substr(0, 40)+"..." : blog.title}</div>
 
                 <div className='my-3 flex items-center justify-between'>
                     <div className='flex items-center gap-2'>
-                        <img alt="person" src="/images/person.png" className='w-7 h-7 rounded-full' />
+                        <img alt="person" src={"/images/person.png"} className='w-7 h-7 rounded-full' />
                         <div className='text-text text-sm'>Darlene Robertson</div>
                     </div>
 
@@ -25,9 +33,9 @@ export default function Card() {
                     </div>
                 </div>
 
-                <div className='text-sm text-text'>Japan’s financial watchdog is reportedly planning to force improvements at a number of licensed cryptocurrency...</div>
+                <div className='text-sm text-text'>{blog.body.length > 100 ? blog.body.substr(0, 100)+"..." : blog.body}</div>
 
-                <div className='flex items-center gap-2 mt-3 cursor-pointer'>
+                <div onClick={() => navigate(`/blogs/${blog._id}`)} className='flex items-center gap-2 mt-3 cursor-pointer'>
                     <div>Read More</div>
                     <MdOutlineTrendingFlat />
                 </div>

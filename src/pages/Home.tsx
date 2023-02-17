@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Footer from '../components/common/Footer/Footer'
 import Navbar from '../components/common/Navbar/Navbar'
 import Subscribe from '../components/common/Subscribe/Subscribe'
@@ -11,8 +11,25 @@ import OurSolutions from '../components/Home/OurSolutions'
 import Service from '../components/Home/Service'
 import TechPlatform from '../components/Home/TechPlatform'
 import WhyWeStandOut from '../components/Home/WhyWeStandOut'
+import { getBlogs } from '../queries/use-posts'
 
 export default function Home() {
+
+  const [postsList, setPostsList] = useState<any>([]);
+
+  const fetchPosts = async () => {
+    try {
+      let res = await getBlogs(6, 0);
+      setPostsList(res.data.docs);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchPosts();
+  }, [])
+
   return (
     <div>
         <Navbar />
@@ -33,7 +50,7 @@ export default function Home() {
 
         <TechPlatform />
 
-        <MoneyAlert />
+        <MoneyAlert blogs={postsList} />
 
         <Subscribe />
 

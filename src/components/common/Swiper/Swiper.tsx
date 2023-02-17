@@ -12,8 +12,13 @@ import "swiper/css/navigation";
 import NextBtn from './NextBtn';
 import PrevBtn from './PrevBtn';
 import Card from '../Card/Card';
+import { BlogInterface } from '../../../utils/interfaces';
 
-export default function Swiper() {
+interface Props {
+  blogs: BlogInterface[]
+}
+
+export default function Swiper({blogs}:Props) {
   return (
     <SwiperContainer
       breakpoints={{
@@ -35,14 +40,9 @@ export default function Swiper() {
       loop={true}
       className="mySwiper relative flex justify-between"
     >
-        <SwiperSlide><Card /></SwiperSlide>
-        <SwiperSlide><Card /></SwiperSlide>
-        <SwiperSlide><Card /></SwiperSlide>
-        <SwiperSlide><Card /></SwiperSlide>
-        <SwiperSlide><Card /></SwiperSlide>
-        <SwiperSlide><Card /></SwiperSlide>
-        <SwiperSlide><Card /></SwiperSlide>
-        <SwiperSlide><Card /></SwiperSlide>
+      {blogs.map(blog => {
+        return(<SwiperSlide key={blog._id}><Card blog={blog} /></SwiperSlide>)
+      })}
 
         <div className='hidden md:flex absolute w-full justify-between z-10 top-[45%]'>
             <NextBtn />

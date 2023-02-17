@@ -2,12 +2,14 @@ import React, {useState} from 'react'
 
 import { motion } from 'framer-motion';
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { navigation } from '../../../utils/navigation';
 
 import { MdSearch, MdClose, MdSegment } from "react-icons/md";
 
 export default function MobileNav() {
+
+    const navigate = useNavigate();
 
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
     const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
@@ -18,11 +20,6 @@ export default function MobileNav() {
 
     const toggleMobileNav = ():void => {  
       setIsNavOpen(!isNavOpen)
-      if(isNavOpen) {
-        document.body.style.overflow = "none"
-      }else {
-        document.body.style.overflow = "initial"
-      }
     }
 
     const navigationListVariants = {
@@ -69,7 +66,10 @@ export default function MobileNav() {
             animate={isNavOpen ? "open" : "closed"}>
                 <motion.div variants={sidebar} className='w-full h-[100vh] absolute top-0 left-0 bg-gradient-to-r from-[#00B9FF] to-[#5C80FF] z-50 flex flex-col items-center justify-center'>
                     
-                    <MdClose onClick={toggleMobileNav} className='absolute top-5 right-5 w-6 h-6 cursor-pointer text-[white]' />
+                    <MdClose onClick={() => {
+                      toggleMobileNav();
+                      document.body.style.overflow = "initial";
+                    }} className='absolute top-5 right-5 w-6 h-6 cursor-pointer text-[white]' />
                     
                     {navigation.map(nav => {
                         return(
@@ -77,9 +77,13 @@ export default function MobileNav() {
                         key={nav.id} 
                         variants={navigationListVariants}
                         className="text-2xl mb-5 text-[white]">
-                            <Link to={nav.route}>
-                            {nav.name}
-                            </Link>
+                            <div onClick={() => {
+                              toggleMobileNav();
+                              document.body.style.overflow = "initial";
+                              navigate(nav.route);
+                            }}>
+                              {nav.name}
+                            </div>
                         </motion.div>)
                     })}
                 </motion.div>
@@ -109,7 +113,10 @@ export default function MobileNav() {
                         {isSearchOpen ? <MdClose className='w-6 h-6 cursor-pointer' /> : <MdSearch className='w-6 h-6 cursor-pointer' />}
                     </div>
 
-                    <div className='ml-4' onClick={toggleMobileNav}>
+                    <div className='ml-4' onClick={() => {
+                      document.body.style.overflow = 'hidden';
+                      toggleMobileNav()
+                    }}>
                         <MdSegment className='w-6 h-6 cursor-pointer' />
                     </div>
                 </div> 
