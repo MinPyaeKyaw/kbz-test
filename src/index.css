@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.layoutPadding {
+  @apply px-[2%] md:px-[15%];
+}
+.layoutVerticlePadding {
+  @apply py-[50px] md:py-[60px];
+}
+.layoutMarginTop {
+  @apply mt-[40px] md:mt-[70px];
+}
+.layoutMarginBottom {
+  @apply mb-[40px] md:mb-[70px];
+}
+
+@font-face {
+  font-family: jost;
+  src: url('./assets/fonts/Jost-Regular.ttf');
+}
+
+body {
+  margin: 0;
+  font-family: jost;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
