@@ -6,7 +6,7 @@ import Consultation from '../components/Blog/Consultation'
 import News from '../components/Blog/News'
 import { getCategories } from '../queries/use-categories'
 import { getTags } from '../queries/use-tags'
-import { getBlogs, getLatestBlogs, getRelatedBlogs } from '../queries/use-posts'
+import { getBlogs, getLatestBlogs } from '../queries/use-posts'
 import { useLocation } from 'react-router-dom'
 
 export default function Blog() {
