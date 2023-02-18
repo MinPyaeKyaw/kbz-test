@@ -70,7 +70,6 @@ export default function Blog() {
       let res = await getBlogs(2, +initialPaginationProps.offset + +initialPaginationProps.limit);
       setInitialPaginationProps({limit: 2, offset: +initialPaginationProps.offset + +initialPaginationProps.limit})
       setPosts([...posts, ...res.data.docs]);
-      console.log(res)
     } catch (error) {
       console.log(error);
     }
